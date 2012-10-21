@@ -1,5 +1,7 @@
-.DS_Store
-.settings
+## Generic files
 
-dist
-tmp
+*.DS_Store
+*.settings
+*.swp
+.out
+
