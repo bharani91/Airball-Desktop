@@ -3,5 +3,6 @@
 *.DS_Store
 *.settings
 *.swp
-.out
+*.project
+*.out
 
