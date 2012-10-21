@@ -1,0 +1,14 @@
+#Sat Oct 13 23:44:48 GMT+05:30 2012
+eclipse.preferences.version=1
+packages/OSX\ 10.5\ Intel/app_page=http\://api.appcelerator.net/p/pages/app_page?token\=m4yxtJA5
+packages/OSX\ 10.5\ Intel/app_version=1.0
+packages/OSX\ 10.5\ Intel/label=OSX 10.5 Intel
+packages/OSX\ 10.5\ Intel/platform=osx
+packages/OSX\ 10.5\ Intel/pubdate=2012-10-02 10\:56\:50
+packages/OSX\ 10.5\ Intel/url=http\://api.appcelerator.net/p/v1/download?token\=f4yFdAJ2
+packages/Windows\ 32-bit/app_page=http\://api.appcelerator.net/p/pages/app_page?token\=m4yxtJA5
+packages/Windows\ 32-bit/app_version=1.0
+packages/Windows\ 32-bit/label=Windows 32-bit
+packages/Windows\ 32-bit/platform=win32
+packages/Windows\ 32-bit/pubdate=2012-10-02 10\:56\:50
+packages/Windows\ 32-bit/url=http\://api.appcelerator.net/p/v1/download?token\=64yFdB66

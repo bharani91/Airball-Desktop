@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<!--
+  The woods are lovely, dark, and deep,
+  But I have promises to keep,
+  And miles to go before I sleep,
+  And miles to go before I sleep.
+  ~ Robert Frost
+-->
+
+<!--[if lt IE 7]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <title>AirBall</title>
+    <meta name="author" content="Bharani Muthukumaraswamy <bharani@abhayam.co.in>">
+
+    <link rel="stylesheet" href="public/style/reset.css" media="screen, projection">
+    <link rel="stylesheet" href="public/style/app.css" media="screen, projection">
+
+    <script src="public/js/vendor/modernizr-1.6.min.js"></script>
+    <script src="public/js/vendor/jquery-1.5.1.min.js"></script>
+    <script src="public/js/vendor/underscore.js"></script>
+    <script src="public/js/vendor/backbone.js"></script>
+    <script src="public/js/app.js"></script>
+    <script src="public/js/local.js"></script>
+    <script src="public/js/filesystem.js"></script>
+    <script src="public/js/init.js"></script>
+    
+    <!-- Templates -->
+
+    <script type="text/template" id="shot_template">
+      <a href='#shot/<%= id %>' class="shot_link">
+        <div class='overlay'></div>
+        <img src='<%= image_teaser_url %>' alt='<%= title %>' class='thumbnail' />
+        <h3><%= title %></h3>
+      </a>
+
+      <a href='#player/<%= player.username %>' class="player"><img src='<%= player.avatar_url %>'><%= player['name'] %></a>
+      <ul class='meta clearfix'>
+        <li class='comments'><%= comments_count %> Comments</li>
+        <li class='likes'><%= likes_count %> Likes</li>
+      </ul>
+    </script>
+
+    <script type="text/template" id="sidebar_header_template">
+      <header>
+        <% _.each(link_list, function(link) { %>
+          <a href='<%= link %>' title='<%= link %>' class='<%= link %>'><%= link %></a>
+        <% }) %>
+      </header>
+    </script>
+
+    <script type="text/template" id="shot_detail_template">
+      <div class='main_image_wrapper'>
+        
+        <img src='<%= image_url %>' alt='<%= title %>' title='main_image' />
+        <div class="image_loading">Loading...</div>
+        
+      </div>
+      
+      <div class='save_local'>
+          <button class='save' data-title='<%= title %>' data-remote-url='<%= image_url %>' data-url='<%= url %>' data-player-name='<%= player.username %>'>Add to collection</button>
+      </div>
+      
+      <div class="player_details clearfix">
+        <ul>
+          <li class="player_thumbnail"><img src='<%= player.avatar_url %>'></li>
+          <li class='player_name'>
+            <a href='#player/<%= player.username %>'><%= player.name %></a>
+            <a href='http://dribbble.com/<%= player.username %>' class="small_link" target="_blank">Dribbble</a>
+            <% if (player.website_url) { %>
+              <a href='<%= player.website_url %>' class="small_link" target="_blank">Website</a>
+            <% } %>
+          </li>
+        </ul>
+
+        <ul class="stats">
+          <li><strong>Shots:</strong> <%= player.shots_count %></li>
+          <li><strong>Followers</strong> <%= player.followers_count %></li>
+          <li><strong>Following</strong> <%= player.following_count %></strong></li>
+        </ul>
+      </div>
+      
+    </script>
+
+    <script type="text/template" id="shot_comment_template">
+      <li class="comment">
+        
+        <div class='content clearfix'>
+          <img src='<%= player.avatar_url %>'>
+          <p><a href='#player/<%= player.username  %>'><strong><%= player.name %></strong></a> <%= body %></p>
+        </div>
+      </li>
+    </script>
+
+    <script type="text/template" id="user_profile_template">
+      <div class="player_details_large clearfix">
+        <div class="avatar_wrapper">
+          <img src='<%= avatar_url %>'>
+        </div>
+
+        <h3><%= name %></h3>
+        <p class="location"><%= location %></p>
+        <ul class="links">
+          <li><a href='http://dribbble.com/<%= name %>' target="_blank" class="button">Dribbble</a></li>
+          <% if (website_url) { %>
+              <li><a href='<%= website_url %>' target="_blank" class="button">Website</a></li>
+            <% } %>
+        </ul>
+
+        <ul class="player_stats clearfix">
+          <li>Shots: <span><%= shots_count %></span></li>
+          <li>Likes: <span><%= likes_count %></span></li>
+          <li>Followers: <span><%= followers_count %></span></li>
+          <li>Following: <span><%= following_count %></span></li>
+        </ul>
+      </div>
+    </script>
+
+
+  </head>
+
+  <body>
+
+
+
+    
+    <header id="header">
+      <a href="#"><h1>AirBall</h1></a>
+      <nav class='local_shots_container'>
+        <button class='local_shots'>Saved Shots</button>
+      </nav>
+    </header>
+
+
+    <article id="article">
+      <div class="sidebar">
+        <header>
+          <a href="#" title="Popular" class="popular">Popular</a>
+          <a href="#everyone" title="Latest" class="everyone">Everyone</a>
+          <a href="#debut" title="Best" class="debut">Debut</a>
+        </header><!--sidebar header-->
+
+        <div class="post_list_container clearfix">
+          <div class="loading">No shots :(</div>
+        </div>
+
+        <footer id="list_footer">
+          <button class="refresh">Refresh</button>
+        </footer>
+        
+      </div><!--sidebar-->
+
+      <div class="main"></div><!--main_viewport-->
+    </article>    
+
+  </body>
+</html>
